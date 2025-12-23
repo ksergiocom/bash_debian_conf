@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ruta_script="/root/stats.sh"
-schedule="* * * * 10"
+schedule="*/10 * * * *"
 
 cd "$(dirname "{BASH_SOURCE[0]}")"
 
