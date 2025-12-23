@@ -114,12 +114,69 @@ fi
 
 
 
+
+
+
+
 ### Mis cosas ###################################
 
+
 # Mi PS1 custom;
-PS1='\[\e[91m\]\u\[\e[0m\]:\[\e[38;5;246m\]\w\[\e[0m\]\\$ '
+PS1='\[\e[91;1m\]\u\[\e[2m\]@\[\e[22;1m\]\h\[\e[0;38;5;246m\]\w\[\e[0m\]\\$ '
+
+
+### Custom Banner ###
+memory_available=$(free --mega | grep "Mem" | tr -s ' ' | cut -d ' ' -f 7)
+memory_used=$(free --mega | grep "Mem" | tr -s ' ' | cut -d ' ' -f 3)
+memory_perc=$(bc <<< "scale=2; $memory_used*100/$memory_available")
+
+disk_total=0
+disk_used=0
+while read line
+do
+    total=$(echo "$line" | cut -d ' ' -f 2)
+    used=$(echo "$line" | cut -d ' ' -f 3)
+    
+    disk_total=$((disk_total + total))
+    disk_used=$((disk_used + used))
+done < <(df -m | grep "/dev/" | grep -v "boot" | grep -v "tmp" | tr -s ' ' | tr -d %)
+disk_perc=$(bc <<< "scale=2; $disk_used*100/$disk_total")
+
+cpu_idle=$(vmstat | tail -1 | tr -s ' ' | cut -d ' ' -f 16)
+cpu_usage=$((100 - cpu_idle))
 
 # Mostrar cosas en la terminal;
-fastfetch
-echo "¡Hagamos cosas!"
+cat << EOF
+######################################
+.................@@. @@...............
+...............#.      @..............
+...............@   @.  :@.............
+..........@@@:         :@.............
+..............@        ::@............
+..............:        ::@............
+..............@        ::@............
+..............+        .::@...........
+.............@          ::@...........
+.............@         .:::@..........
+............:.          :::@..........
+............@           ::::@.........
+...........@            .:::@.........
+............@%@          :@...........
+................@ .@.@..@=............
+..................@..@................
+..................@...@...............
+..................@...@...............
+...............@@@@..@@...............
+...................@*@................
+######################################
+RAM: ${memory_used} / ${memory_available} MB (${memory_perc}%)
+Disk: ${disk_used} / ${disk_total} MB (${disk_perc}%)
+CPU%: ${cpu_usage}%
+Users: ${active_unique_users}
+######################################
+          ¡Hagamos cosas!
+EOF
+
+### FIN Banner ###
+
 

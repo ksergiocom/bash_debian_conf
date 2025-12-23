@@ -18,7 +18,6 @@ apt-get update -y
 apt-get install -y \
 	vim \
 	ufw \
-	fastfetch \
 	openssh-server \
 	codium \
 	github-desktop \
