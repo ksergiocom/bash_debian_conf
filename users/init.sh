@@ -1,7 +1,7 @@
 #!/bin/bash
 
-USUARIOS=(sekhudol)
-GRUPOS=(sudo user42)
+USUARIOS=(ksergio)
+GRUPOS=(sudo)
 
 for GRUPO in "${GRUPOS[@]}"; do
   if getent group "$GRUPO" > /dev/null

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Permitir SSH en el nuevo puerto
-ufw allow 4242/tcp
+ufw allow 22/tcp
 
 # Políticas por defecto
 ufw default deny incoming

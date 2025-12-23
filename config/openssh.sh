@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PUERTO=20
+PUERTO=22
 SSH_CONFIG="/etc/ssh/sshd_config"
 
 # Reemplazar Port (comentado o no)
