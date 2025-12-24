@@ -145,7 +145,8 @@ disk_perc=$(bc <<< "scale=2; $disk_used*100/$disk_total")
 cpu_idle=$(vmstat | tail -1 | tr -s ' ' | cut -d ' ' -f 16)
 cpu_usage=$((100 - cpu_idle))
 
-# Mostrar cosas en la terminal;
+active_unique_users=$(who | tr -s ' ' | cut -d ' ' -f 1 | sort -u | wc -l)
+
 cat << EOF
 ######################################
 .................@@. @@...............
